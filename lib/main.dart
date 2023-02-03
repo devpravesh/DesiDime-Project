@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:desidime/controller/controller.dart';
 import 'package:desidime/view/popular.dart';
 import 'package:desidime/view/top.dart';
@@ -45,6 +47,12 @@ class _MyHomePageState extends State<MyHomePage> {
               _controller.fetchTopdeal();
             },
             color: Colors.red,
+          ),
+          MaterialButton(
+            onPressed: () {
+              log(_controller.topdeals[0].deals![0].imageMedium.toString());
+            },
+            color: Colors.green,
           )
         ],
         bottom: TabBar(
