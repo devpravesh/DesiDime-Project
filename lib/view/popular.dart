@@ -62,6 +62,9 @@ class _PopularState extends State<Popular> {
                                       Icons.comment,
                                       size: 20,
                                     ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
                                     Text(_controller.populardeals[0]
                                         .deals![index].commentsCount
                                         .toString()),

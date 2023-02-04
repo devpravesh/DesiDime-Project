@@ -62,6 +62,9 @@ class _TopState extends State<Top> {
                                       Icons.comment,
                                       size: 20,
                                     ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
                                     Text(_controller
                                         .topdeals[0].deals![index].commentsCount
                                         .toString()),
