@@ -19,6 +19,10 @@ class PopularModel {
   SeoSettings? seoSettings;
   List<Deal>? deals;
   Event? event;
+  String? error;
+  PopularModel.withError(String errorMessage) {
+    error = errorMessage;
+  }
 
   factory PopularModel.fromJson(Map<String, dynamic> json) => PopularModel(
         seoSettings: json["seo_settings"] == null

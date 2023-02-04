@@ -1,10 +1,11 @@
 import 'dart:developer';
 
-import 'package:desidime/controller/controller.dart';
+import 'package:desidime/binding.dart';
 import 'package:desidime/view/popular.dart';
 import 'package:desidime/view/top.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const DefaultTabController(length: 3, child: MyHomePage()),
+      initialBinding: RootBinding(),
     );
   }
 }
@@ -35,26 +37,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _controller = Get.put(MyController());
+  SharedPreferences? prefs;
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  check() async {
+    prefs = await SharedPreferences.getInstance();
+    log(prefs!.getString('top').toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Deals"),
-        actions: [
-          MaterialButton(
-            onPressed: () {
-              _controller.fetchTopdeal();
-            },
-            color: Colors.red,
-          ),
-          MaterialButton(
-            onPressed: () {
-              log(_controller.topdeals[0].deals![0].imageMedium.toString());
-            },
-            color: Colors.green,
-          )
-        ],
         bottom: TabBar(
           tabs: [
             const Tab(text: "TOP"),
@@ -110,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Top(),
           Popular(),
-          Icon(Icons.directions_bike),
+          Popular(), // Same API is Called for Featured list in the task documention that's why i mention same page
         ],
       ),
     );
